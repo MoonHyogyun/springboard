@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<form th:action="@{/boardModify}" method="post">
+		<table>
+			<tr>
+				<td>
+					<!-- <span th:text="${board.boardNo}">
+					</span> -->
+					<input type="hidden" th:name="boardNo" th:value="${board.boardNo}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					제목 : <input type="text" th:name="boardTitle" th:value="${board.boardTitle}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					이름 : <input type="text" th:name="boardUser" th:value="${board.boardUser}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					날짜 : 
+					<span th:text="${board.boardDate}">
+					</span>
+					<input type="hidden" th:name="boardDate" th:value="${board.boardDate}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="submit" th:value="수정">
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>

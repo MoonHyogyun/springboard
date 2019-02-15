@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<form th:action="@{/boardAdd}" method="post">
+		<table>
+			<tr>
+				<td>
+					비밀번호 : <input type="text" name="boardPw">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					제목 : <input type="text" name="boardTitle">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					내용 : <input type="text" name="boardContent">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					이름 : <input type="text" name="boardUser">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="submit" th:value="등록">
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>

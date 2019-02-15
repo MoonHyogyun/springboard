@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<table border=1>
+		<tr>
+			<td>번호</td>
+			<td>제목</td>
+			<td>이름</td>
+			<td>날짜</td>
+		</tr>
+		<tr th:each="m : ${list}">
+			<td th:text="${m.boardNo}" ></td>
+			<td th:text="${m.boardTitle}" ></td>
+			<td th:text="${m.boardUser}" ></td>
+			<td th:text="${m.boardDate}" ></td>
+			<td><a th:href="@{'/boardRemove' + '?boardNo=' + ${m.boardNo}}" >삭제</a></td>
+			<td><a th:href="@{'/modifyBoard' + '?boardNo=' + ${m.boardNo}}" >수정</a></td>
+		</tr>
+	</table>
+</body>
