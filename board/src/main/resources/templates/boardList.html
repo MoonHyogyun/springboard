@@ -10,12 +10,29 @@
 			<td>날짜</td>
 		</tr>
 		<tr th:each="m : ${list}">
-			<td th:text="${m.boardNo}" ></td>
-			<td th:text="${m.boardTitle}" ></td>
-			<td th:text="${m.boardUser}" ></td>
-			<td th:text="${m.boardDate}" ></td>
-			<td><a th:href="@{'/boardRemove' + '?boardNo=' + ${m.boardNo}}" >삭제</a></td>
-			<td><a th:href="@{'/modifyBoard' + '?boardNo=' + ${m.boardNo}}" >수정</a></td>
+			<td th:text="${m.boardNo}"></td>
+			<td th:text="${m.boardTitle}"></td>
+			<td th:text="${m.boardUser}"></td>
+			<td th:text="${m.boardDate}"></td>
+			<td><a th:href="@{'/boardRemove' + '?boardNo=' + ${m.boardNo}}">삭제</a></td>
+			<td><a th:href="@{'/modifyBoard' + '?boardNo=' + ${m.boardNo}}">수정</a></td>
 		</tr>
 	</table>
+
+	<a th:href="@{/boardList(currentPage=0)}"><button th:text="처음"></button></a>
+
+	<a th:if="${currentPage > 0}"
+		th:href="@{/boardList(currentPage=${currentPage-1})}"><button
+			th:text="이전"></button></a>
+
+	<a th:if="${lastPage > currentPage}"
+		th:href="@{/boardList(currentPage=${currentPage+1})}"><button
+			th:text="다음"></button></a>
+			
+	<a th:href="@{/boardList(currentPage=${lastPage})}"><button
+			th:text="끝"></button></a>
+	<br/>
+
+	<a th:href="@{/boardAdd}"><button th:text="글등록하기"></button></a>
 </body>
+</html>

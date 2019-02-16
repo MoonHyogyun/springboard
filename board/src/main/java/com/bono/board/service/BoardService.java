@@ -22,7 +22,7 @@ public class BoardService {
 	public Board getBoard(int boardNo) {
 		return boardMapper.selectBoardOne(boardNo);
 	}
-	// 전체리스트
+	// 전체리스트 
 	public Map<String, Object> getBoardList(int currentPage) {
 		final int ROW_PER_RAGE = 10;
 		Map<String, Integer> map = new HashMap<String, Integer>();

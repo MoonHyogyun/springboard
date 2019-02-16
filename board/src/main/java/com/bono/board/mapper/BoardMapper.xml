@@ -27,7 +27,7 @@
 		ORDER BY board_date DESC
 		LIMIT #{currentPage}, #{rowPerPage}
 	</select>
-	
+	<!-- 데이터베이스에 저장되어있는 전체 행의 값을 가져온다. -->
 	<select id="selectBoardCount" resultType="int">
 		SELECT
 			count(*)
@@ -47,8 +47,8 @@
 			#{boardTitle},
 			#{boardContent},
 			#{boardUser},
-			<!-- type이 date일경우 curdate(),  datetime일경우 now()-->
-			curdate()
+			<!-- type이 date일경우 curDate(),  dateTime일경우 now()-->
+			curDate()
 		)
 	</insert>
 	
@@ -62,8 +62,8 @@
 	<update id="updateBoard" parameterType="com.bono.board.vo.Board">
 		UPDATE board SET
 			board_title = #{boardTitle},
-			board_content = #{boardContent},
-			board_user = #{boardUser}
+			board_user = #{boardUser},
+			board_date = curDate()
 		WHERE board_no = #{boardNo}
 	</update>
 </mapper>
