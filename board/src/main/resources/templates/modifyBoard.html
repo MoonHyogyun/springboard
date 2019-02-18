@@ -1,6 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 	<form th:action="@{/modifyBoard}" method="post">
@@ -8,37 +9,42 @@
 			<tr>
 				<td>
 					<!-- <span th:text="${board.boardNo}">
-					</span> -->
-					<input type="hidden" th:name="boardNo" th:value="${board.boardNo}">
+					</span> --> <input type="hidden" th:name="boardNo"
+					th:value="${board.boardNo}">
+				</td>
+			</tr>
+			<tr>
+				<td>비밀번호 : <input type="password" th:name="boardPw"
+					th:value="${board.boardPw}">
+				</td>
+			</tr>
+			<tr>
+				<td>제목 : <input type="text" th:name="boardTitle"
+					th:value="${board.boardTitle}">
+				</td>
+			</tr>
+			<tr>
+				<td>이름 : <input type="text" th:name="boardUser"
+					th:value="${board.boardUser}">
 				</td>
 			</tr>
 			<tr>
 				<td>
-					제목 : <input type="text" th:name="boardTitle" th:value="${board.boardTitle}">
+				내용 :<textarea  name="boardContent" rows="15"  th:text="${board.boardContent}"></textarea>
+				</td>
+			</tr>
+<!-- 			<tr>
+				<td>내용 : <input type="text" th:name="boardContent"
+					th:value="${board.boardContent}">
+				</td> 
+			</tr> -->
+			<tr>
+				<td>날짜 : <span th:text="${board.boardDate}"> </span> <input
+					type="hidden" th:name="boardDate" th:value="${board.boardDate}">
 				</td>
 			</tr>
 			<tr>
-				<td>
-					이름 : <input type="text" th:name="boardUser" th:value="${board.boardUser}">
-				</td>
-			</tr>
-						<tr>
-				<td>
-					내용 : <input type="text" th:name="boardContent" th:value="${board.boardContent}">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					날짜 : 
-					<span th:text="${board.boardDate}">
-					</span>
-					<input type="hidden" th:name="boardDate" th:value="${board.boardDate}">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="submit" th:value="수정">
-				</td>
+				<td><input type="submit" th:value="수정"></td>
 			</tr>
 		</table>
 	</form>

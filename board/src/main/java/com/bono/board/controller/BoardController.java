@@ -21,7 +21,7 @@ public class BoardController {
 	//전체리스트 화면
 	@GetMapping(value = "/boardList")
 	public String boardList(Model model,
-			@RequestParam(value = "currentPage", required = false, defaultValue = "0") int currentPage) {
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
 		Map<String, Object> returnMap = boardService.getBoardList(currentPage);
 		System.out.println("/boardList"); // /boardList 컨트롤러 동작 확인
 		model.addAttribute("list", returnMap.get("list"));
@@ -43,8 +43,21 @@ public class BoardController {
 		System.out.println("/boardAdd 처리"); // /boardAdd 처리 컨트롤러 동작 확인
 		return "redirect:/boardList";
 	}
+	
+	//삭제화면
+    @GetMapping("/deleteBoard")
+    //list화면에서 삭제 할 boardNo값을 받아와서 boardNo변수에 담고 그 값을 getBoard메서드를 호출 입력한다.
+    public String deleteBoard(@RequestParam(value="boardNo")int boardNo, Model model) {
+		System.out.println("deleteBoard 실행, Controller");
+    	//getBoard를 호출한 후 return값을 boardUpdate변수에 담아준다.
+		Board boardDelete = boardService.getBoard(boardNo);
+		//model영역에 boardUpdate값을 board라는 이름으로 담아준다.
+    	model.addAttribute("board", boardDelete);
+    	return "boardDelete"; //단순히 forward해서 boardDelete 삭제확인 할 화면을 보여주는 메서드
+    	
+    }
 	//삭제처리
-	@GetMapping(value = "/boardRemove")
+	@PostMapping(value = "/boardRemove")
 	public String boardRemove(Board board) {
 		boardService.removeBoard(board);
 
@@ -69,5 +82,14 @@ public class BoardController {
 		return "redirect:/boardList"; // 수정처리후 boardList화면으로 redirect
 
 	}
+	//상세보기
+    @GetMapping("/boardDetail")
+    public String boardDetail(int boardNo, Model model) {
+    	Board board = boardService.getBoard(boardNo);
+    	model.addAttribute("board",board);
+		return "boardDetail";
+
+    	
+    }
 
 }

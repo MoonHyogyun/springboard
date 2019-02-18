@@ -28,7 +28,7 @@ public class BoardService {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		// 1.
 		// vo.setCurrentPage(currentPage)
-		map.put("currentPage", currentPage);
+		map.put("currentPage", (currentPage-1)*ROW_PER_RAGE);
 		map.put("rowPerPage", ROW_PER_RAGE);
 		// 2.
 		int boardCount = boardMapper.selectBoardCount();

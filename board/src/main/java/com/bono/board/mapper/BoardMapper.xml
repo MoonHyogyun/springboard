@@ -7,6 +7,7 @@
 		SELECT
 			board_no AS boardNo,
 			board_title AS boardTitle,
+			board_content as boardContent,
 			board_user AS boardUser,
 			board_date AS boardDate
 		FROM board
@@ -54,16 +55,22 @@
 	
 	<delete id="deleteBoard" parameterType="com.bono.board.vo.Board">
 		DELETE
-		FROM board
-		WHERE board_no = #{boardNo}
+			FROM board
+		WHERE 
+			board_no = #{boardNo}
+		AND 
+			board_pw= #{boardPw}
 		
 	</delete>
 	
 	<update id="updateBoard" parameterType="com.bono.board.vo.Board">
 		UPDATE board SET
 			board_title = #{boardTitle},
+			board_content = #{boardContent},
 			board_user = #{boardUser},
 			board_date = curDate()
-		WHERE board_no = #{boardNo}
+		WHERE board_no = #{boardNo}	
+		AND 
+			board_pw= #{boardPw}
 	</update>
 </mapper>

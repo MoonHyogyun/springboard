@@ -20,24 +20,20 @@
 			<td>제목</td>
 			<td>이름</td>
 			<td>날짜</td>
-			<td>삭제</td>
-			<td>수정</td>
 		</tr>
 		    </thead>
     <tbody>   
 		<tr th:each="m : ${list}">
 			<td th:text="${m.boardNo}"></td>
-			<td><a th:href="@{'/' + '?boardNo=' + ${m.boardNo}}"th:text="${m.boardTitle}"></a></td>
+			<td><a th:href="@{'/boardDetail' + '?boardNo=' + ${m.boardNo}}"th:text="${m.boardTitle}"></a></td>
 			<td th:text="${m.boardUser}"></td>
 			<td th:text="${m.boardDate}"></td>
-			<td><a th:href="@{'/boardRemove' + '?boardNo=' + ${m.boardNo}}">삭제</a></td>
-			<td><a th:href="@{'/modifyBoard' + '?boardNo=' + ${m.boardNo}}">수정</a></td>
 		</tr>
 	    </tbody>
   </table>
 </div>
 
-	<a th:href="@{/boardList(currentPage=0)}"><button th:text="처음"></button></a>
+	<a th:href="@{/boardList(currentPage=1)}"><button th:text="처음"></button></a>
 
 	<a th:if="${currentPage > 0}"
 		th:href="@{/boardList(currentPage=${currentPage-1})}"><button
@@ -47,7 +43,7 @@
 		th:href="@{/boardList(currentPage=${currentPage+1})}"><button
 			th:text="다음"></button></a>
 			
-	<a th:href="@{/boardList(currentPage=${lastPage})}"><button
+	<a th:href="@{/boardList(currentPage=${lastPage+1})}"><button
 			th:text="끝"></button></a>
 	
 
