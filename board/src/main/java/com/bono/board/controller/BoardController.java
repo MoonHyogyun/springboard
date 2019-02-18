@@ -21,7 +21,7 @@ public class BoardController {
 	//전체리스트 화면
 	@GetMapping(value = "/boardList")
 	public String boardList(Model model,
-			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
+			@RequestParam(value = "currentPage", required = false, defaultValue = "0") int currentPage) {
 		Map<String, Object> returnMap = boardService.getBoardList(currentPage);
 		System.out.println("/boardList"); // /boardList 컨트롤러 동작 확인
 		model.addAttribute("list", returnMap.get("list"));

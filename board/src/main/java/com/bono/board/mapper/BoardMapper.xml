@@ -24,7 +24,7 @@
 			board_user AS boardUser,
 			board_date AS boardDate
 		FROM board
-		ORDER BY board_date DESC
+		ORDER BY board_no DESC
 		LIMIT #{currentPage}, #{rowPerPage}
 	</select>
 	<!-- 데이터베이스에 저장되어있는 전체 행의 값을 가져온다. -->

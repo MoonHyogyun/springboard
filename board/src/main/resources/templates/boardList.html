@@ -24,10 +24,10 @@
 			<td>수정</td>
 		</tr>
 		    </thead>
-    <tbody>
+    <tbody>   
 		<tr th:each="m : ${list}">
 			<td th:text="${m.boardNo}"></td>
-			<td th:text="${m.boardTitle}"></td>
+			<td><a th:href="@{'/' + '?boardNo=' + ${m.boardNo}}"th:text="${m.boardTitle}"></a></td>
 			<td th:text="${m.boardUser}"></td>
 			<td th:text="${m.boardDate}"></td>
 			<td><a th:href="@{'/boardRemove' + '?boardNo=' + ${m.boardNo}}">삭제</a></td>
