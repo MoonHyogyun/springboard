@@ -91,5 +91,10 @@ public class BoardController {
 
     	
     }
+	@GetMapping(value = "/index") //
+	public String index() {
+		System.out.println("/index "); // /index 컨트롤러 동작 확인
+		return "index";
+	}
 
 }

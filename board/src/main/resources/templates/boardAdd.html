@@ -1,36 +1,149 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>지갑 리스트</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+  body {
+    font: 20px Montserrat, sans-serif;
+    line-height: 1.8;
+    color: #333333;
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+  .bg-1 { 
+    background-color: #1abc9c; /* Green */
+    color: #ffffff;
+  }
+  .bg-2 { 
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+  }
+  .bg-3 { 
+    background-color: #ffffff; /* White */
+    color: #555555;
+  }
+  .bg-4 { 
+    background-color: #2f2f2f; /* Black Gray */
+    color: #fff;
+  }
+  .container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+  .navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+    color: #1abc9c !important;
+  }
+  </style>
+  
+  
+  <script>
+		$(document).ready(function(){
+	        $('#boardBtn').click(function(){
+	        	$('#boardAddForm').submit(function(event){
+	        		if($('#boardPw').val().length<4){
+		            	$('#boardPw').attr('placeholder','4자리이상 입력해주세요.');
+		            	$('#boardPw').focus();
+		            	return false;
+		            }else if($('#boardTitle').val().length<1){
+		            	$('#boardTitle').attr('placeholder','입력해주세요.');
+		            	$('#boardTitle').focus();
+		            	return false;
+		            }else if($('#boardContent').val().length<1){
+		            	$('#boardContent').attr('placeholder','입력해주세요.');
+		            	$('#boardContent').focus();
+		            	return false;
+		            }else if($('#boardUser').val().length<1){
+		            	$('#boardUser').attr('placeholder','입력해주세요.');
+		            	$('#boardUser').focus();
+		            	return false;
+		            }
+	        	});
+	        });
+	    });
+	</script>
+	
+	
 </head>
 <body>
-	<form th:action="@{/boardAdd}" method="post">
-		<table>
-			<tr>
-				<td>
-					비밀번호 : <input type="text" name="boardPw">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					제목 : <input type="text" name="boardTitle">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					내용 :<textarea  name="boardContent" rows="15"></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					이름 : <input type="text" name="boardUser">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="submit" th:value="등록">
-				</td>
-			</tr>
-		</table>
-	</form>
-	<a th:href="@{/boardList}"><button>리스트로 돌아가기</button></a>
+
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" th:href="@{/index}">처음으로</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a th:href="@{/boardList}">지갑리스트</a></li> 
+        <li><a th:href="@{/boardAdd}">등록</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- First Container -->
+<div class="container">
+	<h1>지갑 등록</h1>
+	<form th:action="@{/boardAdd}" id="boardAddForm" method="post">
+    <div class="form-group">
+      <label for="boardPw">password:</패스워드>
+      <input type="password" class="form-control" id="boardPw" placeholder="패스워드 입력" name="boardPw">
+    </div>
+    <div class="form-group">
+      <label for="boardTitle">코인:</label>
+      <input type="text" class="form-control" id="boardTitle" placeholder="코인명 입력" name="boardTitle">
+    </div>
+        <div class="form-group">
+      <label for="boardContent">지갑 주소:</label>
+      <input type="text" class="form-control" id="boardContent" placeholder="지갑주소 입력" name="boardContent">
+    </div>
+        <div class="form-group">
+      <label for="boardUser">소유자:</label>
+      <input type="text" class="form-control" id="boardUser" placeholder="소유자 입력" name="boardUser">
+    </div>
+
+    <input type="submit" id="boardBtn"th:value="등록">
+  </form>
+
+
+</div>
+
+<!-- Second Container -->
+<div class="container-fluid bg-2 text-center">
+  <h3 class="margin">비트코인</h3>
+  <p>세상에서 제일 안전한 비트코인 지갑 여기서 등록하세요  </p>
+  <a th:href="@{/boardAdd}" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-search"></span> 지갑 등록
+  </a>
+</div>
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+  <p>BonoBonoCompany <a href="https://www.w3schools.com">www.bonobono.com</a></p> 
+</footer>
+
 </body>
+</html>

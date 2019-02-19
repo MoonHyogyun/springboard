@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <!-- Theme Made By www.w3schools.com - No Copyright -->
-  <title>지갑 리스트</title>
+  <title>처음 화면</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -13,7 +13,7 @@
   body {
     font: 20px Montserrat, sans-serif;
     line-height: 1.8;
-    color: #333333;
+    color: #f5f6f7;
   }
   p {font-size: 16px;}
   .margin {margin-bottom: 45px;}
@@ -74,28 +74,9 @@
 </nav>
 
 <!-- First Container -->
-<div class="container">
-	<h1>지갑 제거</h1>
-<form action="/boardRemove" method="post">
-		<table id="customers">
-	<tr>
-		<td>No :<input type="text" name="boardNo"
-					th:value="${board.boardNo}" readonly></td>
-			</tr>
-			<tr>
-	<td>Password :<input type="text" name="boardPw"></td>
-		</tr>
-			<tr>
-		<td><input type="submit" value="삭제"></td>
-			</tr>
-		</table>
-	</form>
-
-	
-
-
-
-
+<div class="container-fluid bg-1 text-center">
+  <h3 class="margin">위로 갈까 아래로 갈까?</h3>
+  <h3>떡락과 떡상</h3>
 </div>
 
 <!-- Second Container -->
@@ -106,6 +87,11 @@
     <span class="glyphicon glyphicon-search"></span> 지갑 등록
   </a>
 </div>
+
+<!-- Third Container (Grid) -->
+<div class="container-fluid bg-3 text-center">    
+  <h3 class="margin">누가 우리의 지갑을 해킹 할수있을까요?</h3><br>
+
 
 <!-- Footer -->
 <footer class="container-fluid bg-4 text-center">

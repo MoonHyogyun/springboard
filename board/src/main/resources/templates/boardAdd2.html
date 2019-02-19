@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
   <!-- Theme Made By www.w3schools.com - No Copyright -->
@@ -75,25 +76,27 @@
 
 <!-- First Container -->
 <div class="container">
-	<h1>지갑 제거</h1>
-<form action="/boardRemove" method="post">
-		<table id="customers">
-	<tr>
-		<td>No :<input type="text" name="boardNo"
-					th:value="${board.boardNo}" readonly></td>
-			</tr>
-			<tr>
-	<td>Password :<input type="text" name="boardPw"></td>
-		</tr>
-			<tr>
-		<td><input type="submit" value="삭제"></td>
-			</tr>
-		</table>
-	</form>
+	<h1>지갑 등록</h1>
+	<form th:action="@{/boardAdd}" method="post">
+    <div class="form-group">
+      <label for="boardPw">password:</패스워드>
+      <input type="password" class="form-control" id="boardPw" placeholder="패스워드 입력" name="boardPw">
+    </div>
+    <div class="form-group">
+      <label for="boardTitle">코인:</label>
+      <input type="text" class="form-control" id="boardTitle" placeholder="코인명 입력" name="boardTitle">
+    </div>
+        <div class="form-group">
+      <label for="boardContent">지갑 주소:</label>
+      <input type="text" class="form-control" id="boardContent" placeholder="지갑주소 입력" name="boardContent">
+    </div>
+        <div class="form-group">
+      <label for="boardUser">소유자:</label>
+      <input type="text" class="form-control" id="boardUser" placeholder="소유자 입력" name="boardUser">
+    </div>
 
-	
-
-
+    <input type="submit" th:value="등록">
+  </form>
 
 
 </div>
