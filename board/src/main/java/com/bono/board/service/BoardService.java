@@ -1,14 +1,23 @@
 package com.bono.board.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bono.board.mapper.BoardMapper;
 import com.bono.board.vo.Board;
+import com.bono.board.vo.BoardRequest;
+import com.bono.board.vo.Boardfile;
 
 // interface로 디커플링 가능
 // Transaction -> 예외 발생시 실행 취소
@@ -47,8 +56,51 @@ public class BoardService {
 		return boardMapper.selectBoardCount();
 	}
 	//등록처리
-	public int addBoard(Board board) {
-		return boardMapper.insertBoard(board);
+	public void addBoard(BoardRequest boardRequest,String path) {
+		// 1.BoardRequest를 분리 : board , file , file정보
+		// 2.board -> boardVo
+		// 3.file정보 -> boardFileVo
+		// 4.file -> +path를 이용해 물리적 장치 저장
+		
+		//1
+		Board board = new Board();
+		board.setBoardTitle(boardRequest.getBoardTitle());
+		
+		boardMapper.insertBoard(board); // jjdev cafe 1280번 글 확인
+		//2
+		Board boar = new Board();
+		board.setBoardNo(board.getBoardNo());
+		List<MultipartFile> files = boardRequest.getFiles();
+		for(MultipartFile f : files) {
+			// f->  boardFile
+			Boardfile boardfile = new Boardfile();
+			boardfile.setBoardNo(board.getBoardNo());
+			boardfile.setFilesize(f.getSize());
+			boardfile.setFileType(f.getContentType());
+			
+			String origicalFilename = f.getOriginalFilename();
+			int i = origicalFilename.lastIndexOf(".");
+			String ext = origicalFilename.substring(i+1);
+			boardfile.setFileExt(ext);
+			String fileName = UUID.randomUUID().toString(); // 16진수를 랜덤문자만들기 
+			boardfile.setFileName(fileName);
+			// 전체작업이 롤백되면 파일삭제작업 직접
+			
+			//3 파일저장
+			try {
+				f.transferTo(new File(path+"/"+ fileName +"."+ ext));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		//boardFileMapper.insertBoard(boardFile);
+
+	
 	}
 	//삭제처리
 	public int removeBoard(Board board) {

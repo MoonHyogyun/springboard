@@ -36,6 +36,11 @@
 	</select>
 	
 	<insert id="insertBoard" parameterType="com.bono.board.vo.Board">
+	
+	        <selectKey resultType="int" keyProperty="boardNo" order="AFTER">
+            SELECT LAST_INSERT_ID()
+            </selectKey>
+
 		INSERT INTO board (
 			board_pw,
 			board_title,

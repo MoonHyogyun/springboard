@@ -2,6 +2,9 @@ package com.bono.board.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bono.board.service.BoardService;
 import com.bono.board.vo.Board;
+import com.bono.board.vo.BoardRequest;
 
 
 @Controller
@@ -38,11 +42,17 @@ public class BoardController {
 	}
 	//등록처리
 	@PostMapping(value = "/boardAdd") 
-	public String boardAdd(Board board) { //등록화면에서 값을 포스트방식으로 받을때 boardAdd 메서드 실행
-		boardService.addBoard(board);
+	public String boardAdd(BoardRequest boardRequest, HttpServletRequest request) { //등록화면에서 값을 포스트방식으로 받을때 boardAdd 메서드 실행
+		
 		System.out.println("/boardAdd 처리"); // /boardAdd 처리 컨트롤러 동작 확인
+		String path = request.getSession().getServletContext().getRealPath(""); //매우긴데 API를 통해 쉽게 불러올수있을것같다
+		boardService.addBoard(boardRequest, path);
 		return "redirect:/boardList";
-	}
+	} /* Service
+		 1.board안에 fileList분해하여 DB들어갈수있는 형태
+		 2.파일저장 : 파일 경로
+	  */
+	
 	
 	//삭제화면
     @GetMapping("/deleteBoard")
